@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+  title: 'Professional Software Development in 2019',
+  date: 'Jan 1st, 2019',
+  firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -107,7 +123,52 @@ const data = [
 
   Step 3: Don't forget to return something from your function!
 
-  Step 4: Outside your function, loop over the data. At each iteration you'll use your component to create an article and append it to the DOM inside the 'articles' div.
+  Step 4: Outside your function, loop over the data. 
+  At each iteration you'll use your component to create an article and append it to the DOM inside the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articleDiv = document.querySelector('.articles');
+
+function articleMaker(dataObj) {
+  const treeDiv = document.createElement('div');
+  const treeTitle = document.createElement('h2');
+  const treeDatePara = document.createElement('p');
+  const treeContentPara1 = document.createElement('p');
+  const treeContentPara2 = document.createElement('p');
+  const treeContentPara3 = document.createElement('p');
+  const treeButton = document.createElement('span');
+  // const treeButton = document.createElement('button');
+
+  treeDiv.appendChild(treeTitle);
+  treeDiv.appendChild(treeDatePara);
+  treeDiv.appendChild(treeButton);
+  treeDiv.appendChild(treeContentPara1);
+  treeDiv.appendChild(treeContentPara2);
+  treeDiv.appendChild(treeContentPara3);
+  
+  // treeSpan.appendChild(treeButton);
+
+  treeDiv.classList.add('article');
+  treeDatePara.classList.add('date');
+  treeButton.classList.add('expandbutton');
+
+  treeTitle.textContent = dataObj.title;
+  treeDatePara.textContent = dataObj.date;
+  treeContentPara1.textContent = dataObj.firstParagraph;
+  treeContentPara2.textContent = dataObj.secondParagraph;
+  treeContentPara3.textContent = dataObj.thirdParagraph;
+  treeButton.textContent = "More info...";
+
+  treeButton.addEventListener('click', event => {
+    treeDiv.classList.toggle('article-open')
+  //   panelOpenButton.classList.toggle('hide-btn')
+  //   panelCloseButton.classList.toggle('hide-btn')
+  //   panelContent.classList.toggle('toggle-on')
+  });
+  return treeDiv;
+}
+data.forEach(x => {
+  const article = articleMaker(x)
+  articleDiv.appendChild(article)
+});
