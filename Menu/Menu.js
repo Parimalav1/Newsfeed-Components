@@ -9,6 +9,47 @@ let menuItems = [
   'Log Out'
 ];
 
+/*
+input1 = ['File', 'Edit', 'View', 'Window'];
+output1 = 
+<div>
+  <ul>
+    <li>File</li>
+    <li>Edit</li>
+    <li>View</li>
+    <li>Window</li>
+  </ul>
+</div>
+
+input2 = ['File', 'Edit'];
+output2 = 
+<div>
+  <ul>
+    <li>File</li>
+    <li>Edit</li>
+  </ul>
+</div>
+
+input3 = [Students',
+  'Faculty',
+  "What's New",
+  'Tech Trends',
+  'Music',
+  'Log Out'
+];
+output3 = 
+<div>
+  <ul>
+    <li>Students</li>
+    <li>Faculty</li>
+    <li>What's New</li>
+    <li>Tech Trends</li>
+    <li>Music</li>
+    <li>Log Out</li>
+  </ul>
+</div>
+
+*/
 /* 
   Step 1: Write a component called 'menuMaker' to create a menu like the markup below:
 
@@ -31,3 +72,28 @@ let menuItems = [
 
   Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned markup to the DOM.
 */
+
+function menuMaker(list) {
+  const menuDiv = document.createElement('div');
+  const menuList = document.createElement('ul');
+
+  menuDiv.appendChild(menuList);
+  menuDiv.classList.add('menu');
+
+  for(let i=0; i<list.length; i++) {
+    const listItemHtmlElement = document.createElement('li');
+    listItemHtmlElement.textContent = list[i];
+    menuList.appendChild(listItemHtmlElement);
+  }
+  const imgHtmlElem = document.querySelector('.menu-button');
+  imgHtmlElem.addEventListener('click', event => {
+    menuDiv.classList.toggle('menu--open')
+  });
+  return menuDiv;
+}
+
+
+const headerDiv = document.querySelector('.header');
+const menuHtmlElemSubtree = menuMaker(menuItems);
+headerDiv.appendChild(menuHtmlElemSubtree);
+
